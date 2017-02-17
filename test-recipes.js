@@ -28,6 +28,45 @@ describe('Recipes', function(){
 			res.body.length.should.be.at.least(1);
 
 			const expectedKeys = ['id', 'name', 'ingredients'];
-		})
-	})
-})
+			res.body.forEach(function(item){
+				item.should.be.a('object');
+				item.should.include.keys(expectedKeys);
+			});
+		});
+	});
+
+	it('should add an item on POST', function(){
+		const newItem = {name: 'brownies', ingredients: false}
+		.post('/recipes')
+		.send(newItem);
+		.then(function(res){
+			res.should.have.status(201);
+			res.should.be.json;
+			res.body.should.be.a('object');
+			res.body.should.include.keys('id', 'name', 'ingredients');
+			res.body.should.not.be.null;
+
+			res.body.should.deep.equal(Object.assign(newItem, {id: res.body.id}));
+		});
+	});
+
+
+	it('should update items on PUT', function(){
+		const updateDate = {
+			name: 'foo',
+			checked: true
+		};
+			
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
