@@ -40,6 +40,7 @@ describe('Recipes', function(){
 
 	it('should add an item on POST', function(){
 		const newItem = {name: 'brownies', ingredients: false}
+		return chai.request(app)
 		.post('/recipes')
 		.send(newItem)
 		.then(function(res){
@@ -57,7 +58,7 @@ describe('Recipes', function(){
 	it('should update items on PUT', function(){
 		const updateData = {
 			name: 'foo',
-			checked: true
+			ingredients: true
 		};
 
 		return chai.request(app)
