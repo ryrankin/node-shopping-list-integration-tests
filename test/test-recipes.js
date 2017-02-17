@@ -7,12 +7,15 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+
+
 describe('Recipes', function(){
 
 	before(function(){
 		return runServer();
 	});
 
+	
 	after(function(){
 		return closeServer();
 	});
@@ -38,7 +41,7 @@ describe('Recipes', function(){
 	it('should add an item on POST', function(){
 		const newItem = {name: 'brownies', ingredients: false}
 		.post('/recipes')
-		.send(newItem);
+		.send(newItem)
 		.then(function(res){
 			res.should.have.status(201);
 			res.should.be.json;
